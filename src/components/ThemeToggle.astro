@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+---
+<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch colour theme" hidden>
+  <span class="theme-moon"><Icon name="moon" size={18} /></span>
+  <span class="theme-sun"><Icon name="sun" size={18} /></span>
+</button>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('#theme-toggle');
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+  let manual = false;
+  try { manual = ['light', 'dark'].includes(localStorage.getItem('theme') || ''); } catch { /* Storage can be unavailable. */ }
+  function apply(theme: string) {
+    document.documentElement.dataset.theme = theme;
+    button?.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+  }
+  apply(document.documentElement.dataset.theme || (media.matches ? 'dark' : 'light'));
+  if (button) button.hidden = false;
+  button?.addEventListener('click', () => {
+    const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    manual = true;
+    apply(theme);
+    try { localStorage.setItem('theme', theme); } catch { /* Still works in memory. */ }
+  });
+  media.addEventListener('change', (event) => { if (!manual) apply(event.matches ? 'dark' : 'light'); });
+</script>

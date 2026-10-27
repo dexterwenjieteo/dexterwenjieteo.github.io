@@ -1,0 +1,15 @@
+---
+import { education } from '../data/education';
+---
+<section id="education" aria-labelledby="education-title">
+  <div class="section-heading"><div><p class="eyebrow section-kicker">04 / Education</p><h2 id="education-title">Education</h2></div></div>
+  <div class="education-list">{education.map(item => <article>
+    <p class="small-label">{item.period}</p>
+    <h3>{item.institution}, {item.country}</h3>
+    <p class="degree">{item.degree}</p>
+    {item.details && <p class="education-details">{item.details}</p>}
+    {item.focus && <p class="education-details">{item.focus}</p>}
+    <p class="education-details"><strong>Relevant coursework:</strong> {item.coursework.join('; ')}.</p>
+    {item.project && <div class="education-project"><p class="small-label">Course project</p><h4>{item.project.title}</h4><p>{item.project.description}</p></div>}
+  </article>)}</div>
+</section>

@@ -1,0 +1,10 @@
+---
+import { experience } from '../data/experience';
+---
+<section id="experience" class="section" aria-labelledby="experience-title">
+  <div class="section-heading"><div><p class="eyebrow section-kicker">03 / Experience</p><h2 id="experience-title">Research experience</h2></div></div>
+  <div class="experience-list">{experience.map(item => <article class="experience-item">
+    <div class="experience-date">{item.period}<span>{item.location}</span></div>
+    <div><h3>{item.institution}</h3><p class="experience-role">{item.role}</p><p class="supervisor">Supervisor: {item.supervisor}</p><p class="experience-description">{item.description}</p></div>
+  </article>)}</div>
+</section>

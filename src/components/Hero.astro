@@ -1,0 +1,27 @@
+---
+import { profile } from '../data/profile';
+import Icon from './Icon.astro';
+const links = [
+  { label: 'Google Scholar', url: profile.scholar, icon: 'scholar' },
+  { label: 'LinkedIn', url: profile.linkedin, icon: 'linkedin' },
+  { label: 'GitHub', url: profile.github, icon: 'github' },
+];
+---
+<section id="about" class="hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow">Computer Engineering · NTU, Singapore</p>
+    <h1 id="hero-title">{profile.name}</h1>
+    <p class="hero-role">{profile.role}</p>
+    <p class="hero-affiliation">{profile.affiliation}</p>
+    <p class="biography">{profile.biography}</p>
+    <div class="hero-links">
+      {links.map(link => <a href={link.url} target="_blank" rel="noopener noreferrer"><Icon name={link.icon} size={17} />{link.label}</a>)}
+      <a href={profile.cv} target="_blank" rel="noopener noreferrer"><Icon name="file" size={17} />Academic CV</a>
+      <a href={`mailto:${profile.email}`}><Icon name="mail" size={17} />Email</a>
+    </div>
+  </div>
+  <figure class="portrait">
+    {profile.portrait ? <img src={profile.portrait} alt="Dexter Wen Jie Teo" width="800" height="800" decoding="async" /> : <div class="portrait-placeholder" role="img" aria-label="Neutral portrait placeholder"><span>DT</span><span class="portrait-line" aria-hidden="true"></span></div>}
+    {!profile.portrait && <figcaption>Portrait forthcoming</figcaption>}
+  </figure>
+</section>

@@ -1,0 +1,75 @@
+name: Refresh publications
+
+on:
+  workflow_dispatch:
+  schedule:
+    # A daily due check, NOT a fixed weekly refresh schedule.
+    - cron: '17 5 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publication-sync-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    # Remains inactive until explicitly enabled after local verification.
+    if: vars.PUBLICATION_SYNC_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    outputs:
+      content_changed: ${{ steps.sync.outputs.content_changed }}
+      ref: ${{ steps.persist.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - name: Refresh manually or check rolling due date
+        id: sync
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        shell: bash
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" == "schedule" ]]; then
+            npm run sync:due
+          else
+            npm run sync:publications
+          fi
+      - run: npm run check && npm run build && npm run verify
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
+      - name: Persist cache and successful UTC timestamps
+        id: persist
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- src/data/publications-scholar.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Scholar publication metadata and rolling sync state"
+            git push origin "HEAD:refs/heads/$DEFAULT_BRANCH"
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  deploy-changed-publications:
+    needs: refresh
+    if: needs.refresh.outputs.content_changed == 'true' && vars.PUBLICATION_SYNC_ENABLED == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    with:
+      ref: ${{ needs.refresh.outputs.ref }}

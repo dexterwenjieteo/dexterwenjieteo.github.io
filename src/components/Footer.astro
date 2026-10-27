@@ -1,0 +1,10 @@
+---
+import { profile } from '../data/profile';
+import Icon from './Icon.astro';
+---
+<footer id="contact" class="site-footer">
+  <div class="container">
+    <div class="contact-main"><div><p class="eyebrow section-kicker">06 / Contact</p><h2>Let’s connect.</h2><p>For research conversations and academic enquiries.</p></div><a class="contact-email" href={`mailto:${profile.email}`}>{profile.email}<Icon name="arrow" size={22} /></a></div>
+    <div class="footer-bottom"><p>© {new Date().getFullYear()} {profile.name}</p><div><a href={profile.scholar} target="_blank" rel="noopener noreferrer">Scholar <Icon name="arrow" size={13} /></a><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <Icon name="arrow" size={13} /></a><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <Icon name="arrow" size={13} /></a><a href="#about">Back to top ↑</a></div></div>
+  </div>
+</footer>

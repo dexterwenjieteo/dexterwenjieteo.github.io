@@ -1,0 +1,7 @@
+---
+import { awards } from '../data/awards';
+---
+<section id="awards" aria-labelledby="awards-title">
+  <div class="section-heading"><div><p class="eyebrow section-kicker">05 / Recognition</p><h2 id="awards-title">Awards & honours</h2></div></div>
+  <ul class="awards-list">{awards.map(award => <li><h3>{award.name}</h3><p>{award.institution}</p>{award.detail && <p class="small-label">{award.detail}</p>}</li>)}</ul>
+</section>

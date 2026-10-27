@@ -1,0 +1,63 @@
+[
+  {
+    "id": "aortic-reconstruction-spie-2027",
+    "title": "Single-slice 3D aortic reconstruction using implicit neural representations",
+    "authors": ["N. Shehata", "D. W. J. Teo", "F. Dell’Aniello Picard", "P. Poudel", "M. H. Yacoub", "H. Lombaert"],
+    "venue": "SPIE Medical Imaging 2027: Image Processing · Paper 14518-67",
+    "year": 2027,
+    "status": "Accepted for presentation · Not yet published",
+    "type": "conference",
+    "contribution": "Second author",
+    "links": [{"label": "Conference entry", "url": "https://spie.org/medical-imaging/presentation/Single-slice-3D-aortic-reconstruction-using-implicit-neural-representations/14518-67"}]
+  },
+  {
+    "id": "aorta-inr-2026",
+    "title": "3D Shape Reconstruction from a Single 2D Slice Using Implicit Neural Representations: Application to the Aorta",
+    "authors": ["N. Shehata", "D. W. J. Teo", "F. Dell’Aniello Picard", "P. Poudel", "M. Yacoub", "H. Lombaert"],
+    "venue": "Medical Image Analysis",
+    "year": 2026,
+    "status": "Under review",
+    "type": "manuscript",
+    "contribution": "Second author",
+    "links": []
+  },
+  {
+    "id": "aortic-tracking-2026",
+    "title": "Spatiotemporal Distillation via Recurrent Bottlenecks for Aortic Tracking",
+    "authors": ["D. W. J. Teo", "N. Shehata", "H. Lombaert"],
+    "venue": "MICCAI 2026 · STACOM Workshop",
+    "year": 2026,
+    "status": "Workshop paper",
+    "type": "workshop",
+    "contribution": "First author",
+    "links": [
+      {"label": "Paper", "url": "https://papers.miccai.org/miccai-2026-sat/paper/STACOM2026_042.pdf"},
+      {"label": "Code", "url": "https://github.com/dexterteo4/aortic-temporal-distillation"}
+    ]
+  },
+  {
+    "id": "carvemix-2026",
+    "title": "Native-Space 3D CarveMix for Multi-Site T1w Stroke Segmentation",
+    "authors": ["D. W. J. Teo", "K. Punithakumar"],
+    "venue": "MICCAI 2026 · SWITCH+ Workshop",
+    "year": 2026,
+    "status": "Workshop paper",
+    "type": "workshop",
+    "contribution": "First author",
+    "links": [{"label": "Paper", "url": "https://papers.miccai.org/miccai-2026-sat/paper/ISLES_041.pdf"}]
+  },
+  {
+    "id": "behavior-cloning-2026",
+    "title": "Behavior Cloning of MPC for 3-DOF Robotic Manipulators",
+    "authors": ["T. Guegan", "D. W. J. Teo"],
+    "venue": "ICRA 2026 · RL4IL Workshop",
+    "year": 2026,
+    "status": "Workshop paper",
+    "type": "workshop",
+    "contribution": "Co-author",
+    "links": [
+      {"label": "Paper", "url": "https://rl4il-icra.github.io/assets/papers/P6_behavior.pdf"},
+      {"label": "Code", "url": "https://github.com/theguega/neural-mpc"}
+    ]
+  }
+]

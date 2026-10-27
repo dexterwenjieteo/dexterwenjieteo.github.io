@@ -1,0 +1,16 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import Icon from './Icon.astro';
+import { profile } from '../data/profile';
+---
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="wordmark" href="#about" aria-label="Dexter Wen Jie Teo, home">Dexter Teo<span aria-hidden="true">.</span></a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#research">Research</a><a href="#publications">Publications</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions"><a class="header-cv" href={profile.cv} target="_blank" rel="noopener noreferrer">CV <Icon name="arrow" size={15} /></a><ThemeToggle /></div>
+  </div>
+  <nav class="mobile-nav container" aria-label="Mobile navigation"><a href="#research">Research</a><a href="#publications">Publications</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
+</header>

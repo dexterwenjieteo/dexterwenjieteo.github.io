@@ -1,0 +1,8 @@
+---
+import { profile } from '../data/profile';
+import Icon from './Icon.astro';
+---
+<section id="cv" class="cv-panel" aria-labelledby="cv-title">
+  <div class="cv-heading"><span class="cv-icon"><Icon name="file" size={25} /></span><div><h2 id="cv-title">Academic curriculum vitae</h2><p>Research, education, and academic experience.</p><p class="cv-updated">Public copy updated <time datetime={profile.cvUpdated}>{profile.cvUpdatedLabel}</time></p></div></div>
+  <div class="cv-actions"><a class="button primary" href={profile.cv} target="_blank" rel="noopener noreferrer">View CV <Icon name="arrow" size={16} /></a><a class="download-link" href={profile.cv} download>Download PDF <Icon name="download" size={16} /></a></div>
+</section>

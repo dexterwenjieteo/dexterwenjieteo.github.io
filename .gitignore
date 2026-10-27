@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+.tools/
+tmp/
+.local/
+output/
+*.log
+.DS_Store
+Thumbs.db
+# Original private CV: only the reviewed derivative in public/cv is for hosting.
+/Dexter Wen Jie Teo CV.pdf
+# Keep the source photo local; serve the optimized image without embedded metadata.
+/Google Scholar Photo.heic

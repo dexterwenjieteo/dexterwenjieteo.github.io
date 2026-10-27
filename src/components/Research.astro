@@ -1,0 +1,9 @@
+---
+import { researchThemes } from '../data/profile';
+---
+<section id="research" class="section" aria-labelledby="research-title">
+  <div class="section-heading"><div><p class="eyebrow section-kicker">01 / Research</p><h2 id="research-title">Research interests</h2></div><p class="section-aside">Learning from medical images,<br />across space, time, and settings.</p></div>
+  <div class="research-grid">
+    {researchThemes.map((theme, index) => <article class="research-theme"><span class="theme-number">0{index + 1}</span><h3>{theme.title}</h3><p>{theme.description}</p><p class="theme-topics">{theme.topics}</p></article>)}
+  </div>
+</section>

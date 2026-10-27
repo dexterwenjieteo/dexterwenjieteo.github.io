@@ -1,0 +1,52 @@
+---
+import curated from '../data/publications-curated.json';
+import scholar from '../data/publications-scholar.json';
+import overrides from '../data/publications-overrides.json';
+import { getPublications } from '../lib/publications.mjs';
+import { profile } from '../data/profile';
+import Icon from './Icon.astro';
+const myNames = ['Dexter Wen Jie Teo', 'Dexter W. J. Teo', 'D. W. J. Teo'];
+const publications = getPublications(curated, scholar, overrides);
+---
+<section id="publications" class="section" aria-labelledby="publications-title">
+  <div class="section-heading"><div><p class="eyebrow section-kicker">02 / Publications</p><h2 id="publications-title">Papers & manuscripts</h2></div><a class="text-link" href={profile.scholar} target="_blank" rel="noopener noreferrer">Google Scholar <Icon name="arrow" size={16} /></a></div>
+  <div class="publication-filters" aria-label="Filter publications" hidden>
+    <button type="button" data-filter="all" aria-pressed="true">All work <span>{publications.length}</span></button>
+    <button type="button" data-filter="accepted" aria-pressed="false">Accepted <span>{publications.filter(p => /^accepted/i.test(p.status)).length}</span></button>
+    <button type="button" data-filter="workshop" aria-pressed="false">Workshop papers <span>{publications.filter(p => p.type === 'workshop').length}</span></button>
+    <button type="button" data-filter="manuscript" aria-pressed="false">Under review <span>{publications.filter(p => p.type === 'manuscript').length}</span></button>
+    {publications.some(p => ['journal', 'preprint'].includes(p.type)) && <button type="button" data-filter="other" aria-pressed="false">Other work <span>{publications.filter(p => ['journal', 'preprint'].includes(p.type)).length}</span></button>}
+  </div>
+  <p id="filter-status" class="sr-only" role="status" aria-live="polite"></p>
+  <ol class="publication-list">
+    {publications.map(paper => <li class="publication" data-type={paper.type} data-accepted={/^accepted/i.test(paper.status)}>
+      <div class="publication-year">{paper.year}</div>
+      <article>
+        <div class="publication-meta"><span class:list={['paper-status', { 'under-review': paper.type === 'manuscript' }]}>{paper.status}</span><span class="contribution">{paper.contribution}</span></div>
+        <h3>{paper.title}</h3>
+        <p class="authors">{paper.authors.map((author, index) => <>{myNames.includes(author) ? <strong>{author}</strong> : author}{index < paper.authors.length - 1 ? ', ' : '.'}</>)}</p>
+        <p class="venue">{paper.venue}</p>
+        {paper.citationCount !== null && paper.citationCount !== undefined && <p class="small-label">{paper.citationCount} {paper.citationCount === 1 ? 'citation' : 'citations'} on Google Scholar</p>}
+        {paper.links.length > 0 && <div class="paper-links">{paper.links.map(link => <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}<Icon name="arrow" size={14} /></a>)}</div>}
+      </article>
+    </li>)}
+  </ol>
+</section>
+<script>
+  const filters = document.querySelector<HTMLElement>('.publication-filters');
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const papers = Array.from(document.querySelectorAll<HTMLElement>('.publication'));
+  if (filters) filters.hidden = false;
+  buttons.forEach(button => button.addEventListener('click', () => {
+    const filter = button.dataset.filter;
+    buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    let visible = 0;
+    papers.forEach(paper => {
+      const matches = filter === 'all' || (filter === 'accepted' ? paper.dataset.accepted === 'true' : filter === 'other' ? ['journal', 'preprint'].includes(paper.dataset.type || '') : paper.dataset.type === filter);
+      paper.hidden = !matches;
+      if (!paper.hidden) visible++;
+    });
+    const status = document.querySelector('#filter-status');
+    if (status) status.textContent = `Showing ${visible} ${visible === 1 ? 'publication' : 'publications'}.`;
+  }));
+</script>
