@@ -13,7 +13,7 @@ export const experience = [
     role: 'Mitacs Globalink Research Intern',
     period: 'Jun — Aug 2026',
     supervisor: 'Prof. Kumaradevan Punithakumar',
-    description: 'Developed on-the-fly 3D CarveMix augmentation for native-space stroke MRI. Evaluated MedNeXt architectures across 1,453 multi-site scans, achieving a 0.018 Dice score improvement across stroke cohorts.',
+    description: 'Developed on-the-fly 3D CarveMix augmentation for native-space stroke MRI. Evaluated MedNeXt architectures across 1,453 multi-site scans, achieving a 0.018 Dice score improvement across stroke cohorts. Placed 4th in the ISLES 2026 Challenge, as announced at the MICCAI 2026 SWITCH workshop.',
   },
   {
     institution: 'Polytechnique Montréal',
