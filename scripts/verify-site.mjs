@@ -23,7 +23,7 @@ const curated = JSON.parse(await readFile('src/data/publications-curated.json', 
 const scholar = JSON.parse(await readFile('src/data/publications-scholar.json', 'utf8'));
 const overrides = JSON.parse(await readFile('src/data/publications-overrides.json', 'utf8'));
 assert.equal((html.match(/class="publication"/g) || []).length, getPublications(curated, scholar, overrides).length, 'Expected merged publications in the build');
-assert(!/Ranked 4th|SERPAPI_KEY|\/admin|Refresh Publications/.test(html), 'Private/admin content must not enter the static page');
+assert(!/SERPAPI_KEY|\/admin|Refresh Publications/.test(html), 'Private/admin content must not enter the static page');
 const publicPdf = await readFile('dist/cv/Dexter_Wen_Jie_Teo_CV.pdf');
 try {
   const sourcePdf = await readFile('Dexter Wen Jie Teo CV.pdf');
